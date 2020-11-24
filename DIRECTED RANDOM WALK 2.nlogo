@@ -133,7 +133,7 @@ vision
 vision
 1
 30
-5.0
+14.0
 1
 1
 NIL
@@ -199,7 +199,7 @@ SWITCH
 494
 background?
 background?
-1
+0
 1
 -1000
 
@@ -216,39 +216,107 @@ Hay una primera barrera al formar grupos por visión
 @#$#@#$#@
 ## WHAT IS IT?
 
-(a general understanding of what the model is trying to show or explain)
+This is the second version of DIRECTED RANDOM WALK 1:
+
+As the first version, the phenomenon modelled is the emergence behaviour from a group of turtles/people/particles when randomly approaching into each other. It could be explained as a simple room game in which everyone in the room decides to choose randomly someone in their arounds and take 1 step forward in their direction, repeating the same process multiple times, everyone at the same time, tick by tick.
+
+_ADDED IN 2ND VERSION_:
+
+Turtles now possess a value called **AT** which could be understood as any value in a 1D space which the turtle might change during time when they interact with each other. Following the last example, we could say **AT** is the turtle's "Aligment" (opinion/position on something) and they are comparing it to other turtles **AT**.
+
+In this case **AT** whill change in a rate of +1 or -1, depending on the interaction (explained in HOW IT WORKS:GO section)
+
+►Agents:
+
+Turtles : 
+They would act like the particles/people. Their color depends of their AT (refresh every tick)
+
+_ADDED IN 2ND VERSION_:
+Once turtle moves towards other turtle, that turtle will compare their **AT** and modify it depending on the other turtle **AT**.
+
+Observer:
+It would set values for the setup
+
+►Properties:
+
+Turtles:
+A agenset called **SOMEONE** which refers to the turtle they chose randomly and will approach to. 
+
+_ADDED IN 2ND VERSION_:
+A value called **AT** (0:100) which represents the turtle position in a 1D space or a numerical representation of their "opinion". 
+
+
+Global :
+Vision range value called **VISION**(0:30), every turtle will have the same range of vision.
+Number of turtles created called **NUMBER**(0:100).
+
+
 
 ## HOW IT WORKS
 
-(what rules the agents use to create the overall behavior of the model)
+**SETUP** (Initialize):
+
+First you need to set **NUMBER** and then **VISION** (this one can be changed during the process). Once it is decided, clicking SETUP will create turtles with initial random position.
+
+_ADDED IN 2ND VERSION_:
+Background?: This option when turned on will let you see (from tick number 35) the space the different groups of turtles use turning patches into different colors for each group, also it show us visually how they expand while the group stands still.
+
+
+**GO** (Iterative / Tick):
+
+The turtles first select randomly a turtle in their range of vision and set them as **SOMEONE**, then face them and take 1 step forward in direction to them. 
+
+_ADDED IN 2ND VERSION_:
+Finally the turtle will compare their **AT**, if turtle-1 **AT** is higher than turtle-2 **AT**, turtle-1 will increase their AT +1, and if   turtle-1 **AT** is lower than turtle-2 **AT**, turtle-1 will decrease their AT -1.
+(NOTE: It is not necessary for them to be in the same patch or position, is just turtle-1 moving in direction to turtle-2 and comparing their **AT**, turtle-2 is not necessary interacting with turtle-1).
+
+If there is no one in their range of vision, they wont move until next tick.
 
 ## HOW TO USE IT
 
-(how to use the model, including a description of each of the items in the Interface tab)
+►The **SETUP** and **GO** button were explained in order above.
+
+►The inputs:
+
+**NUMBER**: The number of turtles that would be created. 
+
+**VISION**: Choose the range vision of the individuals.
+
+►The outputs:
+
+_**MONITOR:**_ Positioning of turtles.
+
+
+_ADDED IN 2ND VERSION_:
+
+_**Values monitor**_: 3 monitos for mean, maximum and minimum **AT** values of all the turtles.
+
+_**AT PLOT**_: Plot which displays the how the mean, max and mimimum **AT** value of all turtles changes over time/ticks.
 
 ## THINGS TO NOTICE
 
-(suggested things for the user to notice while running the model)
+Once the model is running, you will notice how the turtles will start to create groups and start to move together as a whole (similarly to "orbitation" around the center of mass).
+
+When different groups meet each other, they will start a "turtle exchange" that most of the time will end up with both groups converging.
+
+
+
+_ADDED IN 2ND VERSION_:
+
+If **VISION** is high enough, the turtles will create just one big group and AT value will converge around one point.
+
+
+Low **VISION** values as 1 or 2 will show totally different behaviour in the _**AT PLOT**_.
+
+
+
 
 ## THINGS TO TRY
 
-(suggested things for the user to try to do (move sliders, switches, etc.) with the model)
+Low **VISION** value (0-10) will create different groups, and once they connect each ither by trading one turtles, they will converge into one big group.
 
-## EXTENDING THE MODEL
+High **VISION** value (11+) will create one big group automatically.
 
-(suggested things to add or change in the Code tab to make the model more complicated, detailed, accurate, etc.)
-
-## NETLOGO FEATURES
-
-(interesting or unusual features of NetLogo that the model uses, particularly in the Code tab; or where workarounds were needed for missing features)
-
-## RELATED MODELS
-
-(models in the NetLogo Models Library and elsewhere which are of related interest)
-
-## CREDITS AND REFERENCES
-
-(a reference to the model's URL on the web if it has one, as well as any other necessary credits, citations, and links)
 @#$#@#$#@
 default
 true
